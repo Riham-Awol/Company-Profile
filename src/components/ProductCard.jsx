@@ -1,14 +1,16 @@
 import { useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { PRODUCTS } from '../data'
 import { useReducedMotion } from '../hooks'
 import { ArrowUpRight, ProductGlyph } from './Icons'
 import Reveal from './Reveal'
 
 const MAX_TILT = 11 // degrees
 
-/** A card that tilts in 3D toward the cursor and links out to the product's own site. */
-function ProductCard({ product, index }) {
+/**
+ * A card that tilts in 3D toward the cursor and links out to the product's own site.
+ * `expanded` adds the longer copy and highlight list used on the products page.
+ */
+export default function ProductCard({ product, index = 0, expanded = false }) {
   const ref = useRef(null)
   const reduced = useReducedMotion()
 
@@ -36,10 +38,10 @@ function ProductCard({ product, index }) {
   }
 
   return (
-    <Reveal className="tilt" delay={index * 0.09}>
+    <Reveal className="tilt" delay={index * 0.07}>
       <motion.a
         ref={ref}
-        className="card"
+        className={`card${expanded ? ' card-lg' : ''}`}
         href={product.url}
         target="_blank"
         rel="noopener noreferrer"
@@ -50,40 +52,35 @@ function ProductCard({ product, index }) {
         transition={{ duration: 0.3 }}
       >
         <div className="card-inner">
-          <span className="card-icon"><ProductGlyph name={product.glyph} /></span>
-          <p className="card-cat">{product.category}</p>
+          <div className="card-top">
+            <span className="card-icon"><ProductGlyph name={product.glyph} /></span>
+            <span className={`chip${product.status === 'Beta' ? ' chip-beta' : ''}`}>{product.status}</span>
+          </div>
+          <p className="card-cat">{product.category} · since {product.since}</p>
           <h3>{product.name}</h3>
-          <p>{product.blurb}</p>
-          <span className="card-go">
-            Visit {product.name}
-            <ArrowUpRight />
-          </span>
+          <p className="card-tagline">{product.tagline}</p>
+          <p>{expanded ? product.detail : product.blurb}</p>
+
+          {expanded && (
+            <ul className="card-highlights">
+              {product.highlights.map((h) => <li key={h}>{h}</li>)}
+            </ul>
+          )}
+
+          <div className="card-foot">
+            {expanded && (
+              <span className="card-metric">
+                <b>{product.metric.value}</b>
+                <small>{product.metric.label}</small>
+              </span>
+            )}
+            <span className="card-go">
+              Visit {product.name}
+              <ArrowUpRight />
+            </span>
+          </div>
         </div>
       </motion.a>
     </Reveal>
-  )
-}
-
-export default function Products() {
-  return (
-    <section className="section" id="products">
-      <div className="shell">
-        <div className="section-head">
-          <div>
-            <p className="eyebrow">What we build</p>
-            <h2>Four platforms,<br />each on its own site</h2>
-          </div>
-          <p className="lead" style={{ maxWidth: '38ch', margin: 0 }}>
-            Every product below started as something we needed ourselves. Open any card to visit its live site.
-          </p>
-        </div>
-
-        <div className="product-grid">
-          {PRODUCTS.map((product, i) => (
-            <ProductCard key={product.name} product={product} index={i} />
-          ))}
-        </div>
-      </div>
-    </section>
   )
 }

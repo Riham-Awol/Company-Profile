@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { COMPANY, PRODUCTS } from '../data'
 import { useReducedMotion } from '../hooks'
 
@@ -39,12 +40,12 @@ export default function Hero() {
             <span className="gradient-text">the Next Decade</span>
           </motion.h1>
           <motion.p variants={item}>
-            {COMPANY.name} designs, ships and runs cloud, data and AI platforms — four of our own products,
-            trusted by teams in 30+ countries.
+            {COMPANY.name} designs, ships and runs cloud, data and AI platforms — {PRODUCTS.length} of our own
+            products, trusted by teams in 30+ countries.
           </motion.p>
           <motion.div className="hero-actions" variants={item}>
-            <a className="btn btn-primary" href="#products">Explore our products</a>
-            <a className="btn btn-ghost" href="#story">Our story</a>
+            <Link className="btn btn-primary" to="/products">Explore our products</Link>
+            <Link className="btn btn-ghost" to="/story">Our story</Link>
           </motion.div>
           <motion.div className="hero-note" variants={item}>
             <span className="pulse-dot" />

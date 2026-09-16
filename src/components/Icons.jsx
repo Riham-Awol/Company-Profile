@@ -25,6 +25,24 @@ export const ProductGlyph = ({ name }) => {
         <path d="M17.5 15.5 18.2 17.4 20 18.1l-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.9Z" />
       </>
     ),
+    map: (
+      <>
+        <path d="m3 6.5 6-2.5 6 2.5 6-2.5v13L15 19.5 9 17l-6 2.5v-13Z" />
+        <path d="M9 4v13M15 6.5v13" />
+      </>
+    ),
+    shield: (
+      <>
+        <path d="M12 3.2 19 6v5.6c0 4.2-2.9 7.4-7 8.6-4.1-1.2-7-4.4-7-8.6V6l7-2.8Z" />
+        <path d="m9.2 12 2 2 3.6-3.8" />
+      </>
+    ),
+    chat: (
+      <>
+        <path d="M20 14.5a2.5 2.5 0 0 1-2.5 2.5H8l-4 3.5v-13A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5v7Z" />
+        <path d="M8.5 10.5h7M8.5 13.5h4" />
+      </>
+    ),
     ledger: (
       <>
         <rect x="4" y="3" width="16" height="18" rx="2" />
@@ -59,6 +77,12 @@ export const ClockIcon = () => (
   <svg {...base} width={18} height={18}>
     <circle cx="12" cy="12" r="9" />
     <path d="M12 7v5l3 2" />
+  </svg>
+)
+
+export const MenuIcon = ({ open }) => (
+  <svg {...base} width={22} height={22} strokeWidth={1.8}>
+    {open ? <path d="m6 6 12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
   </svg>
 )
 
