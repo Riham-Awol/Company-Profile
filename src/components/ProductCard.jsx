@@ -9,8 +9,7 @@ const MAX_TILT = 11 // degrees
 const MotionLink = motion.create(Link)
 
 /**
- * A card that tilts in 3D toward the cursor. Products with a `url` link out to their own site;
- * sample projects open the contact form instead.
+ * A card that tilts in 3D toward the cursor and opens the product's own page.
  * `expanded` adds the longer copy and highlight list used on the products page.
  */
 export default function ProductCard({ product, index = 0, expanded = false }) {
@@ -40,27 +39,22 @@ export default function ProductCard({ product, index = 0, expanded = false }) {
     py.set(0.5)
   }
 
-  const external = Boolean(product.url)
-  const Card = external ? motion.a : MotionLink
-  const linkProps = external
-    ? { href: product.url, target: '_blank', rel: 'noopener noreferrer' }
-    : { to: '/#contact' }
-
   return (
     <Reveal className="tilt" delay={index * 0.07}>
-      <Card
+      <MotionLink
         ref={ref}
         className={`card${expanded ? ' card-lg' : ''}`}
-        {...linkProps}
+        to={`/products/${product.slug}`}
         style={{ '--accent': product.accent, rotateX: reduced ? 0 : rotateX, rotateY: reduced ? 0 : rotateY }}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         whileHover={reduced ? undefined : { y: -6 }}
         transition={{ duration: 0.3 }}
       >
+        <span className="card-media" style={{ '--photo': `url(${product.image})` }} aria-hidden="true" />
         <div className="card-inner">
           <div className="card-top">
-            <span className="card-icon"><ProductGlyph name={product.glyph} /></span>
+            <span className="card-icon on-media"><ProductGlyph name={product.glyph} /></span>
             <span className={`chip${product.status === 'Sample' ? ' chip-sample' : ''}`}>{product.status}</span>
           </div>
           <p className="card-cat">{product.category}</p>
@@ -76,12 +70,12 @@ export default function ProductCard({ product, index = 0, expanded = false }) {
 
           <div className="card-foot">
             <span className="card-go">
-              {external ? `Visit ${product.name}` : 'Request a demo'}
+              View details
               <ArrowUpRight />
             </span>
           </div>
         </div>
-      </Card>
+      </MotionLink>
     </Reveal>
   )
 }

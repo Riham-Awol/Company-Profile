@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { COMPANY, PRODUCTS } from '../data'
+import { useSearchParams } from 'react-router-dom'
+import { COMPANY, PRODUCTS, SERVICES } from '../data'
 import { CheckIcon, ClockIcon, MailIcon } from './Icons'
 import Reveal from './Reveal'
 
-const EMPTY = { name: '', email: '', company: '', interest: PRODUCTS[0].name, message: '' }
+const EMPTY = { name: '', email: '', company: '', interest: 'General enquiry', message: '' }
 
 function validate(values) {
   const errors = {}
@@ -16,7 +17,10 @@ function validate(values) {
 }
 
 export default function Contact() {
-  const [values, setValues] = useState(EMPTY)
+  // /contact?interest=<product-slug> preselects that product, e.g. from a product page.
+  const [params] = useSearchParams()
+  const preselected = PRODUCTS.find((p) => p.slug === params.get('interest'))?.name
+  const [values, setValues] = useState(() => ({ ...EMPTY, interest: preselected ?? EMPTY.interest }))
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle') // idle | sending | sent
 
@@ -134,8 +138,13 @@ export default function Contact() {
                     <div className="field">
                       <label htmlFor="interest">Interested in</label>
                       <select id="interest" value={values.interest} onChange={update('interest')}>
-                        {PRODUCTS.map((p) => <option key={p.name}>{p.name}</option>)}
-                        <option>Custom project</option>
+                        <option>General enquiry</option>
+                        <optgroup label="Products">
+                          {PRODUCTS.map((p) => <option key={p.name}>{p.name}</option>)}
+                        </optgroup>
+                        <optgroup label="Services">
+                          {SERVICES.map((s) => <option key={s.title}>{s.title}</option>)}
+                        </optgroup>
                       </select>
                     </div>
                   </div>

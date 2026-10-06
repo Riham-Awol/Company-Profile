@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { PRODUCTS, PRODUCT_TYPES } from '../data'
+import { IMAGES, PRODUCTS, PRODUCT_TYPES } from '../data'
 import PageHeader from '../components/PageHeader'
 import ProductCard from '../components/ProductCard'
 import Reveal from '../components/Reveal'
@@ -15,9 +15,10 @@ export default function ProductsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Our work"
+        eyebrow="Products"
         title={<>Products and<br /><span className="gradient-text">sample projects</span></>}
-        lead="Our live platforms link to their own sites. Sample projects show the kind of systems we build for clients."
+        lead="Platforms we run, and sample systems that show what we build for clients. Open any card for details."
+        image={IMAGES.products}
       >
         <motion.div
           className="filters"
@@ -70,8 +71,8 @@ export default function ProductsPage() {
             <h2>Have a similar project in mind?</h2>
             <p className="lead center">Tell us what you need and we&rsquo;ll recommend the right approach.</p>
             <div className="cta-actions">
-              <Link className="btn btn-primary" to="/#contact">Start a conversation</Link>
-              <Link className="btn btn-ghost" to="/about">About us</Link>
+              <Link className="btn btn-primary" to="/contact">Contact us</Link>
+              <Link className="btn btn-ghost" to="/services">Our services</Link>
             </div>
           </Reveal>
         </div>

@@ -1,14 +1,16 @@
 # X Solvd — Company Profile
 
-A multi-page company profile for X Solvd. Live products link out to their own sites;
-sample projects open the contact form.
+A multi-page company profile for X Solvd, with light and dark themes.
 
-| Route       | Page                                                                    |
-| ----------- | ----------------------------------------------------------------------- |
-| `/`         | Hero with the 3D scene, stats, products and projects, process, contact form |
-| `/products` | Products and sample projects, filterable by type                        |
-| `/about`    | Who we are, process and principles (`/story` redirects here)            |
-| `*`         | 404                                                                     |
+| Route              | Page                                                              |
+| ------------------ | ----------------------------------------------------------------- |
+| `/`                | Hero, stats, services, products, process, call to action          |
+| `/services`        | All services and the delivery process                             |
+| `/products`        | Products and sample projects, filterable by type                  |
+| `/products/:slug`  | One page per product: overview, features, link to its live site   |
+| `/about`           | Who we are, process and principles (`/story` redirects here)      |
+| `/contact`         | Contact form (`?interest=<slug>` preselects a product)            |
+| `*`                | 404                                                               |
 
 ## Stack
 
@@ -32,28 +34,24 @@ npm run preview  # serve the built output
 ```
 src/
   App.jsx                 routes + scroll/hash handling
-  data.js                 all copy: products, stats, process, values
-  hooks.js                reduced-motion + scroll-position hooks
-  pages/
-    Home.jsx              hero, stats, products, process preview, contact
-    ProductsPage.jsx      filterable index of products and sample projects
-    AboutPage.jsx         who we are, process, principles
-    NotFound.jsx
-  components/
-    Nav.jsx               fixed header with active route + mobile menu
-    Hero.jsx              headline + lazy-loaded 3D layer
-    Scene3D.jsx           the react-three-fiber scene
-    Stats.jsx             counters that run once on scroll-in
-    ProductCard.jsx       tilting card, compact or expanded
-    PageHeader.jsx        shared hero band for interior pages
-    Contact.jsx           validated contact form
-    Footer.jsx
+  data.js                 all copy and image URLs: products, services, stats, process, values
+  hooks.js                reduced-motion, scroll-position and theme hooks
+  pages/                  Home, Services, Products, Product, About, Contact, NotFound
+  components/             Nav (with theme toggle), Hero, Scene3D, Stats, ProductCard,
+                          PageHeader (optional background photo), Contact, Footer
 ```
+
+## Theme
+
+The light/dark choice is stored in `localStorage` and applied by a small script in
+`index.html` before first paint; first-time visitors get their OS preference. Colours are
+CSS custom properties in `src/styles.css` (`:root` for dark, `[data-theme='light']` for light).
 
 ## Before going live
 
-- **Product URLs** — the Mentee Mentor and Famour `url` values in `src/data.js` are
-  placeholders; set them to the live sites.
+- **Product URLs** — the Mentee Mentor `url` in `src/data.js` is a placeholder.
+- **Photos** — background and product images are hotlinked from Unsplash via `IMAGES` and
+  each product's `image` in `src/data.js`. Replace them with your own (e.g. files in `public/`).
 - **Email** — `COMPANY.email` in `src/data.js` is a placeholder.
 - **Contact form** — validation and the success state are real, but nothing is sent.
   Replace the `setTimeout` in `src/components/Contact.jsx` with a POST to your endpoint.

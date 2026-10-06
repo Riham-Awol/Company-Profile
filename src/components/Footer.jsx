@@ -15,16 +15,18 @@ export default function Footer() {
 
         <div className="foot-col">
           <h4>Products</h4>
-          {PRODUCTS.filter((p) => p.url).map((p) => (
-            <a key={p.slug} href={p.url} target="_blank" rel="noopener noreferrer">{p.name}</a>
+          {PRODUCTS.map((p) => (
+            <Link key={p.slug} to={`/products/${p.slug}`}>{p.name}</Link>
           ))}
         </div>
 
         <div className="foot-col">
           <h4>Company</h4>
-          <Link to="/products">Our work</Link>
-          <Link to="/about">About</Link>
-          <Link to="/#contact">Contact</Link>
+          <Link to="/">Home</Link>
+          <Link to="/services">Services</Link>
+          <Link to="/products">Products</Link>
+          <Link to="/about">About Us</Link>
+          <Link to="/contact">Contact Us</Link>
         </div>
 
       </div>

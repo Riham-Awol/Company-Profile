@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion'
 
-/** Shared hero band for the interior pages. */
-export default function PageHeader({ eyebrow, title, lead, children }) {
+/** Shared hero band for the interior pages, with an optional background photo. */
+export default function PageHeader({ eyebrow, title, lead, image, children }) {
   return (
     <header className="page-header">
+      {image && <span className="bg-photo" style={{ '--photo': `url(${image})` }} />}
       <span className="glow glow-a" />
       <span className="glow glow-b" />
       <div className="shell page-header-inner">

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { COMPANY, PROCESS, VALUES } from '../data'
+import { COMPANY, IMAGES, PROCESS, VALUES } from '../data'
 import PageHeader from '../components/PageHeader'
 import Reveal from '../components/Reveal'
 
@@ -10,6 +10,7 @@ export default function AboutPage() {
         eyebrow="About us"
         title={<>Built to<br /><span className="gradient-text">solve problems</span></>}
         lead={`${COMPANY.name} is a software engineering company that turns complex operational problems into reliable digital products.`}
+        image={IMAGES.about}
       />
 
       <section className="section section-tight">
@@ -63,10 +64,10 @@ export default function AboutPage() {
 
           <Reveal className="cta-card">
             <h2>Let&rsquo;s work together</h2>
-            <p className="lead center">Explore our work or get in touch to discuss your project.</p>
+            <p className="lead center">Get in touch to discuss your project.</p>
             <div className="cta-actions">
-              <Link className="btn btn-primary" to="/products">View our work</Link>
-              <Link className="btn btn-ghost" to="/#contact">Contact us</Link>
+              <Link className="btn btn-primary" to="/contact">Contact us</Link>
+              <Link className="btn btn-ghost" to="/services">Our services</Link>
             </div>
           </Reveal>
         </div>

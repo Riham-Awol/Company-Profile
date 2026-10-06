@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { COMPANY, PRODUCTS } from '../data'
+import { COMPANY, IMAGES, PRODUCTS } from '../data'
 import { useReducedMotion } from '../hooks'
 
 // three.js is ~700kB — kept out of the initial bundle and fetched after paint.
@@ -22,6 +22,7 @@ export default function Hero() {
 
   return (
     <section className="hero" id="top">
+      <span className="bg-photo" style={{ '--photo': `url(${IMAGES.home})` }} />
       <span className="glow glow-a" />
       <span className="glow glow-b" />
 
@@ -40,12 +41,12 @@ export default function Hero() {
             <span className="gradient-text">for real-world problems</span>
           </motion.h1>
           <motion.p variants={item}>
-            {COMPANY.name} designs, builds and supports digital platforms for education, community, trade and
-            property.
+            {COMPANY.name} designs, builds and supports custom software, web and mobile platforms for growing
+            organisations.
           </motion.p>
           <motion.div className="hero-actions" variants={item}>
-            <Link className="btn btn-primary" to="/products">View our work</Link>
-            <Link className="btn btn-ghost" to="/#contact">Contact us</Link>
+            <Link className="btn btn-primary" to="/services">Our services</Link>
+            <Link className="btn btn-ghost" to="/products">View products</Link>
           </motion.div>
         </div>
       </motion.div>
