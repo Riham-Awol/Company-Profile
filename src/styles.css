@@ -613,17 +613,51 @@ a.foot-copy:hover { color: var(--brand); }
 
 /* ---------- theme toggle ---------- */
 .nav-actions { display: flex; align-items: center; gap: 12px; }
-.theme-toggle {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 42px; height: 42px;
-  border-radius: 11px;
-  border: 1px solid var(--line-strong);
-  background: var(--panel);
-  color: var(--ink);
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
+.lamp { position: relative; width: 44px; height: 76px; flex-shrink: 0; }
+.lamp-wire { position: absolute; top: 0; left: 50%; width: 1.5px; height: 10px; margin-left: -0.75px; background: var(--muted); }
+.lamp-shade { position: absolute; top: 8px; left: 2px; width: 40px; height: 26px; overflow: visible; z-index: 2; }
+.lamp-cap { fill: var(--muted); }
+.lamp-dome { fill: #283041; stroke: var(--line-strong); stroke-width: 1; transition: fill 0.4s; }
+.lamp-rim { stroke: rgba(255, 255, 255, 0.18); stroke-width: 1.2; }
+.lamp-bulb {
+  position: absolute; top: 27px; left: 50%; width: 12px; height: 12px; margin-left: -6px; z-index: 1;
+  border-radius: 50%; background: #4a5263;
+  transition: background 0.25s, box-shadow 0.45s;
 }
-.theme-toggle:hover { border-color: var(--brand); color: var(--brand); }
+.lamp-beam {
+  position: absolute; top: 32px; left: 50%; width: 220px; height: 240px; margin-left: -110px; z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 50% 70% at 50% 0%, rgba(255, 205, 130, 0.55), rgba(255, 205, 130, 0.12) 60%, transparent 75%);
+  clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%);
+  opacity: 0; transition: opacity 0.5s;
+}
+.lamp-cord { position: absolute; top: 28px; left: calc(50% + 11px); width: 1.5px; margin-left: -0.75px; background: var(--muted); z-index: 1; }
+.lamp-pull {
+  position: absolute; left: calc(50% + 11px); width: 28px; height: 30px; margin-left: -14px; z-index: 3;
+  display: flex; justify-content: center; align-items: flex-start;
+  padding: 0; border: 0; background: none; cursor: grab; touch-action: none;
+}
+.lamp-pull:active { cursor: grabbing; }
+.lamp-pull:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 8px; }
+.lamp-bead {
+  width: 9px; height: 13px; border-radius: 5px;
+  background: linear-gradient(180deg, var(--brand-2), var(--brand));
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s;
+}
+.lamp-pull:hover .lamp-bead { transform: scale(1.15); }
+.lamp.is-lit .lamp-dome { fill: var(--brand); }
+.lamp.is-lit .lamp-rim { stroke: rgba(255, 230, 190, 0.6); }
+.lamp.is-lit .lamp-bulb {
+  background: #ffe2a6;
+  box-shadow: 0 0 10px 3px rgba(255, 205, 120, 0.9), 0 0 34px 12px rgba(255, 190, 100, 0.45);
+}
+.lamp.is-lit .lamp-beam { opacity: 1; }
+/* Warm "lights on" glow across the page, centred on the lamp. */
+.lamp-flash {
+  position: fixed; inset: 0; z-index: 40; pointer-events: none;
+  background: radial-gradient(circle at var(--fx) var(--fy), rgba(255, 214, 150, 0.6), rgba(255, 200, 120, 0.18) 35%, transparent 70%);
+}
 
 /* ---------- services ---------- */
 .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }

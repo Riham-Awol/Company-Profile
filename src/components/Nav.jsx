@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { COMPANY } from '../data'
-import { useScrolled, useTheme } from '../hooks'
-import { MenuIcon, ThemeIcon } from './Icons'
+import { useScrolled } from '../hooks'
+import { MenuIcon } from './Icons'
+import LampToggle from './LampToggle'
 
 const LINKS = [
   ['Home', '/'],
@@ -17,7 +18,6 @@ export default function Nav() {
   const scrolled = useScrolled(30)
   const [open, setOpen] = useState(false)
   const location = useLocation()
-  const [theme, toggleTheme] = useTheme()
 
   // Any navigation closes the mobile menu.
   useEffect(() => setOpen(false), [location])
@@ -50,15 +50,7 @@ export default function Nav() {
         </nav>
 
         <div className="nav-actions">
-          <button
-            type="button"
-            className="theme-toggle"
-            onClick={toggleTheme}
-            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
-          >
-            <ThemeIcon theme={theme} />
-          </button>
+          <LampToggle />
           <Link className="btn btn-primary nav-cta" to="/contact">Get in Touch</Link>
           <button
             type="button"
