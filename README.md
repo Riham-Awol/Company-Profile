@@ -37,12 +37,14 @@ src/
   data.js                 all copy and image URLs: products, services, stats, process, values
   hooks.js                reduced-motion, scroll-position and theme hooks
   pages/                  Home, Services, Products, Product, About, Contact, NotFound
-  components/             Nav (with theme toggle), Hero, Scene3D, Stats, ProductCard,
+  components/             Nav, LampToggle (theme switch), Hero, Scene3D, Stats, ProductCard,
                           PageHeader (optional background photo), Contact, Footer
 ```
 
 ## Theme
 
+The switch is a pendant lamp in the nav (`src/components/LampToggle.jsx`): drag its cord down,
+or click/tap it or press Enter, to switch — the bulb lights up in light mode.
 The light/dark choice is stored in `localStorage` and applied by a small script in
 `index.html` before first paint; first-time visitors get their OS preference. Colours are
 CSS custom properties in `src/styles.css` (`:root` for dark, `[data-theme='light']` for light).

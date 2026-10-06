@@ -1,7 +1,8 @@
 import { useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { useReducedMotion } from '../hooks'
+import { accentFor } from '../data'
+import { useReducedMotion, useTheme } from '../hooks'
 import { ArrowUpRight, ProductGlyph } from './Icons'
 import Reveal from './Reveal'
 
@@ -15,6 +16,7 @@ const MotionLink = motion.create(Link)
 export default function ProductCard({ product, index = 0, expanded = false }) {
   const ref = useRef(null)
   const reduced = useReducedMotion()
+  const [theme] = useTheme()
 
   const px = useMotionValue(0.5)
   const py = useMotionValue(0.5)
@@ -45,7 +47,7 @@ export default function ProductCard({ product, index = 0, expanded = false }) {
         ref={ref}
         className={`card${expanded ? ' card-lg' : ''}`}
         to={`/products/${product.slug}`}
-        style={{ '--accent': product.accent, rotateX: reduced ? 0 : rotateX, rotateY: reduced ? 0 : rotateY }}
+        style={{ '--accent': accentFor(product, theme), rotateX: reduced ? 0 : rotateX, rotateY: reduced ? 0 : rotateY }}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         whileHover={reduced ? undefined : { y: -6 }}
