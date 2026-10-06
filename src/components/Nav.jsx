@@ -6,8 +6,8 @@ import { useScrolled } from '../hooks'
 import { MenuIcon } from './Icons'
 
 const LINKS = [
-  ['Products', '/products'],
-  ['Our Story', '/story'],
+  ['Our Work', '/products'],
+  ['About', '/about'],
   ['Contact', '/#contact'],
 ]
 
@@ -34,7 +34,7 @@ export default function Nav() {
     >
       <div className="shell nav-inner">
         <Link className="brand" to="/">
-          <span className="brand-mark">N</span>
+          <span className="brand-mark">X</span>
           {COMPANY.name.toUpperCase()}
         </Link>
 

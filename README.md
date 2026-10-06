@@ -1,14 +1,13 @@
-# Nexora — Company Profile
+# X Solvd — Company Profile
 
-A multi-page company profile for a fictional tech product studio. Products and the
-company story each have their own route; every product card links out to that
-product's own site.
+A multi-page company profile for X Solvd. Live products link out to their own sites;
+sample projects open the contact form.
 
 | Route       | Page                                                                    |
 | ----------- | ----------------------------------------------------------------------- |
-| `/`         | Hero with the 3D scene, stats, four featured products, story preview, contact form |
-| `/products` | All seven platforms with filters by category, longer copy and the suite overview |
-| `/story`    | Founding story, full timeline, numbers, values, leadership and studios   |
+| `/`         | Hero with the 3D scene, stats, products and projects, process, contact form |
+| `/products` | Products and sample projects, filterable by type                        |
+| `/about`    | Who we are, process and principles (`/story` redirects here)            |
 | `*`         | 404                                                                     |
 
 ## Stack
@@ -33,12 +32,12 @@ npm run preview  # serve the built output
 ```
 src/
   App.jsx                 routes + scroll/hash handling
-  data.js                 all copy: products, history, values, leadership, offices
+  data.js                 all copy: products, stats, process, values
   hooks.js                reduced-motion + scroll-position hooks
   pages/
-    Home.jsx              hero, stats, featured products, story preview, contact
-    ProductsPage.jsx      filterable index of all seven products
-    StoryPage.jsx         long-form history, timeline, people, studios
+    Home.jsx              hero, stats, products, process preview, contact
+    ProductsPage.jsx      filterable index of products and sample projects
+    AboutPage.jsx         who we are, process, principles
     NotFound.jsx
   components/
     Nav.jsx               fixed header with active route + mobile menu
@@ -53,10 +52,11 @@ src/
 
 ## Before going live
 
-- **Product URLs** — the four `*.example.com` links in `src/data.js` are placeholders.
+- **Product URLs** — the Mentee Mentor and Famour `url` values in `src/data.js` are
+  placeholders; set them to the live sites.
+- **Email** — `COMPANY.email` in `src/data.js` is a placeholder.
 - **Contact form** — validation and the success state are real, but nothing is sent.
   Replace the `setTimeout` in `src/components/Contact.jsx` with a POST to your endpoint.
-- **Copy** — company name, history, stats and addresses in `src/data.js` are invented.
 
 ## Deploying
 

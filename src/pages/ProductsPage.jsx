@@ -1,28 +1,23 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { PRODUCTS, PRODUCT_CATEGORIES } from '../data'
+import { PRODUCTS, PRODUCT_TYPES } from '../data'
 import PageHeader from '../components/PageHeader'
 import ProductCard from '../components/ProductCard'
 import Reveal from '../components/Reveal'
 
-const PLATFORM_STEPS = [
-  { step: '01', title: 'Ship it', text: 'VantaCloud builds, releases and rolls back.', accent: '#22d3ee' },
-  { step: '02', title: 'Measure it', text: 'PulseGrid turns the resulting events into numbers.', accent: '#4ade80' },
-  { step: '03', title: 'Automate it', text: 'Axiom and Relay take the repetitive work off the queue.', accent: '#a78bfa' },
-  { step: '04', title: 'Bill and secure it', text: 'Ledgerly invoices, Aegis controls who can reach what.', accent: '#fb923c' },
-]
+const FILTER_LABELS = { All: 'All', Product: 'Products', 'Sample project': 'Sample projects' }
 
 export default function ProductsPage() {
   const [filter, setFilter] = useState('All')
-  const shown = filter === 'All' ? PRODUCTS : PRODUCTS.filter((p) => p.category === filter)
+  const shown = filter === 'All' ? PRODUCTS : PRODUCTS.filter((p) => p.type === filter)
 
   return (
     <>
       <PageHeader
-        eyebrow="Our products"
-        title={<>Seven platforms,<br /><span className="gradient-text">seven live sites</span></>}
-        lead="Every product below started as something we needed on client work and kept for ourselves. Each one runs on its own site — open any card to go there."
+        eyebrow="Our work"
+        title={<>Products and<br /><span className="gradient-text">sample projects</span></>}
+        lead="Our live platforms link to their own sites. Sample projects show the kind of systems we build for clients."
       >
         <motion.div
           className="filters"
@@ -30,18 +25,18 @@ export default function ProductsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.24 }}
         >
-          {PRODUCT_CATEGORIES.map((category) => (
+          {PRODUCT_TYPES.map((type) => (
             <button
-              key={category}
+              key={type}
               type="button"
-              className={`filter${filter === category ? ' active' : ''}`}
-              onClick={() => setFilter(category)}
-              aria-pressed={filter === category}
+              className={`filter${filter === type ? ' active' : ''}`}
+              onClick={() => setFilter(type)}
+              aria-pressed={filter === type}
             >
-              {filter === category && <motion.span className="filter-bg" layoutId="filter-bg" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
-              <span>{category}</span>
-              {category !== 'All' && (
-                <em>{PRODUCTS.filter((p) => p.category === category).length}</em>
+              {filter === type && <motion.span className="filter-bg" layoutId="filter-bg" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
+              <span>{FILTER_LABELS[type]}</span>
+              {type !== 'All' && (
+                <em>{PRODUCTS.filter((p) => p.type === type).length}</em>
               )}
             </button>
           ))}
@@ -69,38 +64,14 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <section className="section band">
-        <div className="shell">
-          <Reveal>
-            <p className="eyebrow">How they fit together</p>
-            <h2>One suite, four jobs</h2>
-            <p className="lead">
-              You can buy any platform on its own — most customers do. They also share one identity layer and one
-              event pipeline, so adding a second product takes an afternoon rather than a migration.
-            </p>
-          </Reveal>
-          <div className="steps">
-            {PLATFORM_STEPS.map((item, i) => (
-              <Reveal className="step" key={item.step} delay={i * 0.08}>
-                <span className="step-num" style={{ color: item.accent }}>{item.step}</span>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="section">
         <div className="shell">
           <Reveal className="cta-card">
-            <h2>Not sure which one you need?</h2>
-            <p className="lead center">
-              Describe the problem and we&rsquo;ll tell you which platform fits — or that none of them do.
-            </p>
+            <h2>Have a similar project in mind?</h2>
+            <p className="lead center">Tell us what you need and we&rsquo;ll recommend the right approach.</p>
             <div className="cta-actions">
-              <Link className="btn btn-primary" to="/#contact">Talk to an engineer</Link>
-              <Link className="btn btn-ghost" to="/story">How we got here</Link>
+              <Link className="btn btn-primary" to="/#contact">Start a conversation</Link>
+              <Link className="btn btn-ghost" to="/about">About us</Link>
             </div>
           </Reveal>
         </div>

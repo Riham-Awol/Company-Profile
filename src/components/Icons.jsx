@@ -49,6 +49,27 @@ export const ProductGlyph = ({ name }) => {
         <path d="M8 8h8M8 12h8M8 16h5" />
       </>
     ),
+    people: (
+      <>
+        <circle cx="9" cy="8" r="3" />
+        <path d="M3.5 19a5.5 5.5 0 0 1 11 0" />
+        <circle cx="16.5" cy="9.5" r="2.5" />
+        <path d="M15.5 14.2A4.5 4.5 0 0 1 20.5 19" />
+      </>
+    ),
+    heart: <path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z" />,
+    globe: (
+      <>
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="M3.5 12h17M12 3.5c2.4 2.4 3.5 5.2 3.5 8.5s-1.1 6.1-3.5 8.5c-2.4-2.4-3.5-5.2-3.5-8.5s1.1-6.1 3.5-8.5Z" />
+      </>
+    ),
+    building: (
+      <>
+        <rect x="5" y="3" width="14" height="18" rx="1.5" />
+        <path d="M9 7h1.5M13.5 7H15M9 11h1.5M13.5 11H15M9 15h1.5M13.5 15H15M10.5 21v-3h3v3" />
+      </>
+    ),
   }
   return <svg {...base} width={24} height={24}>{paths[name] ?? paths.cloud}</svg>
 }

@@ -34,22 +34,18 @@ export default function Hero() {
 
       <motion.div className="shell hero-shell" variants={container} initial="hidden" animate="show">
         <div className="hero-copy">
-          <motion.p className="eyebrow" variants={item}>Product studio · Est. 2011</motion.p>
+          <motion.p className="eyebrow" variants={item}>Software engineering studio</motion.p>
           <motion.h1 variants={item}>
-            Engineering<br />
-            <span className="gradient-text">the Next Decade</span>
+            Software engineered<br />
+            <span className="gradient-text">for real-world problems</span>
           </motion.h1>
           <motion.p variants={item}>
-            {COMPANY.name} designs, ships and runs cloud, data and AI platforms — {PRODUCTS.length} of our own
-            products, trusted by teams in 30+ countries.
+            {COMPANY.name} designs, builds and supports digital platforms for education, community, trade and
+            property.
           </motion.p>
           <motion.div className="hero-actions" variants={item}>
-            <Link className="btn btn-primary" to="/products">Explore our products</Link>
-            <Link className="btn btn-ghost" to="/story">Our story</Link>
-          </motion.div>
-          <motion.div className="hero-note" variants={item}>
-            <span className="pulse-dot" />
-            All four platforms operating — 99.98% uptime this quarter
+            <Link className="btn btn-primary" to="/products">View our work</Link>
+            <Link className="btn btn-ghost" to="/#contact">Contact us</Link>
           </motion.div>
         </div>
       </motion.div>

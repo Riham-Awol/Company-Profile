@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { COMPANY, PRODUCTS } from '../data'
-import { CheckIcon, ClockIcon, MailIcon, PinIcon } from './Icons'
+import { CheckIcon, ClockIcon, MailIcon } from './Icons'
 import Reveal from './Reveal'
 
 const EMPTY = { name: '', email: '', company: '', interest: PRODUCTS[0].name, message: '' }
@@ -50,19 +50,14 @@ export default function Contact() {
       <div className="shell contact-grid">
         <Reveal>
           <p className="eyebrow">Contact</p>
-          <h2>Tell us what you&rsquo;re building</h2>
+          <h2>Start a conversation</h2>
           <p className="lead">
-            Send us the problem in your own words. An engineer — not a sales rep — reads every message and
-            replies within one business day.
+            Tell us about your project. Our team responds within one business day.
           </p>
           <ul className="contact-list">
             <li>
               <span className="ico"><MailIcon /></span>
               <span><strong>Email</strong>{COMPANY.email}</span>
-            </li>
-            <li>
-              <span className="ico"><PinIcon /></span>
-              <span><strong>Studios</strong>Addis Ababa · Nairobi · Dubai</span>
             </li>
             <li>
               <span className="ico"><ClockIcon /></span>
@@ -112,7 +107,7 @@ export default function Contact() {
                         id="name"
                         value={values.name}
                         onChange={update('name')}
-                        placeholder="Amira Bekele"
+                        placeholder="Your name"
                         aria-invalid={Boolean(errors.name)}
                       />
                       {errors.name && <p className="error">{errors.name}</p>}
@@ -140,7 +135,7 @@ export default function Contact() {
                       <label htmlFor="interest">Interested in</label>
                       <select id="interest" value={values.interest} onChange={update('interest')}>
                         {PRODUCTS.map((p) => <option key={p.name}>{p.name}</option>)}
-                        <option>Something custom</option>
+                        <option>Custom project</option>
                       </select>
                     </div>
                   </div>
@@ -151,7 +146,7 @@ export default function Contact() {
                       id="message"
                       value={values.message}
                       onChange={update('message')}
-                      placeholder="We run a fleet of 200 vehicles and our dispatch data lives in four spreadsheets…"
+                      placeholder="Briefly describe your project or requirements"
                       aria-invalid={Boolean(errors.message)}
                     />
                     {errors.message && <p className="error">{errors.message}</p>}
