@@ -33,14 +33,23 @@ export function useScrolled(offset = 24) {
 /**
  * The colour theme, stored on <html data-theme>. index.html sets the initial value before
  * first paint (saved choice, else the OS preference) so the page never flashes the wrong theme.
+ * Every caller re-renders when the theme changes, wherever the toggle was clicked.
  */
 export function useTheme() {
-  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'dark')
+  const read = () => document.documentElement.dataset.theme || 'dark'
+  const [theme, setTheme] = useState(read)
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme
-    try { localStorage.setItem('theme', theme) } catch { /* storage unavailable — theme still applies */ }
-  }, [theme])
+    const observer = new MutationObserver(() => setTheme(read()))
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+    return () => observer.disconnect()
+  }, [])
 
-  return [theme, () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))]
+  const toggle = () => {
+    const next = read() === 'dark' ? 'light' : 'dark'
+    document.documentElement.dataset.theme = next
+    try { localStorage.setItem('theme', next) } catch { /* storage unavailable — theme still applies */ }
+  }
+
+  return [theme, toggle]
 }

@@ -3,6 +3,18 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Float, MeshDistortMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 
+/** Scene colours per site theme: cool cyan/indigo in dark, warm bronze and caramel in light. */
+const PALETTES = {
+  dark: {
+    core: '#12a4bd', emissive: '#0b4f6c', shell: '#6366f1', dust: '#8fd8e8',
+    key: '#e0f7ff', fillA: '#6366f1', fillB: '#22d3ee', spot: '#a5f3fc',
+  },
+  light: {
+    core: '#b07a4a', emissive: '#5a3418', shell: '#8b5a2b', dust: '#a0714a',
+    key: '#fff4e6', fillA: '#c08552', fillB: '#e0b386', spot: '#ffe2c2',
+  },
+}
+
 /** Gently steers the whole scene toward the pointer for a parallax feel. */
 function ParallaxRig({ children }) {
   const group = useRef()
@@ -23,7 +35,7 @@ function ParallaxRig({ children }) {
 }
 
 /** The hero centrepiece: a slowly morphing, self-rotating blob. */
-function Core() {
+function Core({ palette }) {
   const mesh = useRef()
 
   useFrame((_, delta) => {
@@ -36,8 +48,8 @@ function Core() {
       <mesh ref={mesh} position={[0, 0, 0]}>
         <icosahedronGeometry args={[1.45, 48]} />
         <MeshDistortMaterial
-          color="#12a4bd"
-          emissive="#0b4f6c"
+          color={palette.core}
+          emissive={palette.emissive}
           emissiveIntensity={0.45}
           roughness={0.26}
           metalness={0.42}
@@ -50,7 +62,7 @@ function Core() {
 }
 
 /** Wireframe shell around the core. */
-function Shell() {
+function Shell({ palette }) {
   const mesh = useRef()
 
   useFrame((_, delta) => {
@@ -61,7 +73,7 @@ function Shell() {
   return (
     <mesh ref={mesh}>
       <icosahedronGeometry args={[2.35, 1]} />
-      <meshBasicMaterial color="#6366f1" wireframe transparent opacity={0.22} />
+      <meshBasicMaterial color={palette.shell} wireframe transparent opacity={0.22} />
     </mesh>
   )
 }
@@ -94,7 +106,7 @@ function Satellites({ colors }) {
 }
 
 /** Drifting dust so the space around the core does not read as empty. */
-function Dust({ count = 340 }) {
+function Dust({ palette, count = 340 }) {
   const points = useRef()
 
   const positions = useMemo(() => {
@@ -122,12 +134,14 @@ function Dust({ count = 340 }) {
 
   return (
     <points ref={points} geometry={geometry}>
-      <pointsMaterial size={0.035} color="#8fd8e8" transparent opacity={0.6} sizeAttenuation depthWrite={false} />
+      <pointsMaterial size={0.035} color={palette.dust} transparent opacity={0.6} sizeAttenuation depthWrite={false} />
     </points>
   )
 }
 
-export default function Scene3D({ accents }) {
+export default function Scene3D({ accents, theme = 'dark' }) {
+  const palette = PALETTES[theme] ?? PALETTES.dark
+
   return (
     <Canvas
       className="hero-canvas"
@@ -138,16 +152,16 @@ export default function Scene3D({ accents }) {
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
     >
       <ambientLight intensity={0.55} />
-      <directionalLight position={[4, 5, 5]} intensity={1.5} color="#e0f7ff" />
-      <pointLight position={[-5, -2, -4]} intensity={45} color="#6366f1" />
-      <pointLight position={[5, 2, 3]} intensity={30} color="#22d3ee" />
-      <spotLight position={[0, 6, 2]} angle={0.6} penumbra={1} intensity={55} color="#a5f3fc" />
+      <directionalLight position={[4, 5, 5]} intensity={1.5} color={palette.key} />
+      <pointLight position={[-5, -2, -4]} intensity={45} color={palette.fillA} />
+      <pointLight position={[5, 2, 3]} intensity={30} color={palette.fillB} />
+      <spotLight position={[0, 6, 2]} angle={0.6} penumbra={1} intensity={55} color={palette.spot} />
       <Suspense fallback={null}>
         <ParallaxRig>
-          <Core />
-          <Shell />
+          <Core palette={palette} />
+          <Shell palette={palette} />
           <Satellites colors={accents} />
-          <Dust />
+          <Dust palette={palette} />
         </ParallaxRig>
       </Suspense>
     </Canvas>

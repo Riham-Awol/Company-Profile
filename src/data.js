@@ -41,6 +41,7 @@ export const PRODUCTS = [
     url: 'https://mentee-mentor.example.com',
     image: photo('1523240795612-9a054b0db644'),
     accent: '#22d3ee',
+    accentLight: '#9a6b3f',
     glyph: 'people',
   },
   {
@@ -63,6 +64,7 @@ export const PRODUCTS = [
     url: 'https://matrimonial-website-2xkg.onrender.com/#/o/famour',
     image: photo('1519741497674-611481863552'),
     accent: '#f472b6',
+    accentLight: '#a4505a',
     glyph: 'heart',
   },
   {
@@ -84,6 +86,7 @@ export const PRODUCTS = [
     audience: ['Importers and exporters', 'Freight forwarders', 'Wholesale distributors'],
     image: photo('1494412574643-ff11b0a5c1c3'),
     accent: '#fb923c',
+    accentLight: '#b5763a',
     glyph: 'globe',
   },
   {
@@ -105,9 +108,13 @@ export const PRODUCTS = [
     audience: ['Property owners', 'Facility managers', 'Real estate companies'],
     image: photo('1486406146926-c627a92ad1ab'),
     accent: '#4ade80',
+    accentLight: '#6b7a4b',
     glyph: 'building',
   },
 ]
+
+/** A product's accent colour for the current theme — the light theme uses warmer, earthy tones. */
+export const accentFor = (product, theme) => (theme === 'light' ? product.accentLight : product.accent)
 
 export const PRODUCT_TYPES = ['All', 'Product', 'Sample project']
 

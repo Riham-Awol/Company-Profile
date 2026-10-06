@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
-import { PRODUCTS } from '../data'
+import { PRODUCTS, accentFor } from '../data'
+import { useTheme } from '../hooks'
 import PageHeader from '../components/PageHeader'
 import ProductCard from '../components/ProductCard'
 import Reveal from '../components/Reveal'
@@ -8,13 +9,15 @@ import NotFound from './NotFound'
 
 export default function ProductPage() {
   const { slug } = useParams()
+  const [theme] = useTheme()
   const product = PRODUCTS.find((p) => p.slug === slug)
   if (!product) return <NotFound />
 
   const others = PRODUCTS.filter((p) => p.slug !== slug)
+  const accent = accentFor(product, theme)
 
   return (
-    <div style={{ '--accent': product.accent }}>
+    <div style={{ '--accent': accent }}>
       <PageHeader
         eyebrow={product.category}
         title={<>{product.name}<br /><span className="gradient-text">{product.tagline}</span></>}
@@ -63,7 +66,7 @@ export default function ProductPage() {
           <div className="service-grid four" style={{ marginTop: '40px' }}>
             {product.features.map((feature, i) => (
               <Reveal className="service" key={feature.title} delay={i * 0.07}>
-                <span className="card-icon" style={{ '--accent': product.accent }}><ProductGlyph name={product.glyph} /></span>
+                <span className="card-icon"><ProductGlyph name={product.glyph} /></span>
                 <h3>{feature.title}</h3>
                 <p>{feature.text}</p>
               </Reveal>
