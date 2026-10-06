@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { COMPANY, PRODUCTS } from '../data'
+import { COMPANY, IMAGES, PRODUCTS } from '../data'
 import { useReducedMotion } from '../hooks'
 
 // three.js is ~700kB — kept out of the initial bundle and fetched after paint.
@@ -22,6 +22,7 @@ export default function Hero() {
 
   return (
     <section className="hero" id="top">
+      <span className="bg-photo" style={{ '--photo': `url(${IMAGES.home})` }} />
       <span className="glow glow-a" />
       <span className="glow glow-b" />
 
@@ -34,22 +35,18 @@ export default function Hero() {
 
       <motion.div className="shell hero-shell" variants={container} initial="hidden" animate="show">
         <div className="hero-copy">
-          <motion.p className="eyebrow" variants={item}>Product studio · Est. 2011</motion.p>
+          <motion.p className="eyebrow" variants={item}>Software engineering studio</motion.p>
           <motion.h1 variants={item}>
-            Engineering<br />
-            <span className="gradient-text">the Next Decade</span>
+            Software engineered<br />
+            <span className="gradient-text">for real-world problems</span>
           </motion.h1>
           <motion.p variants={item}>
-            {COMPANY.name} designs, ships and runs cloud, data and AI platforms — {PRODUCTS.length} of our own
-            products, trusted by teams in 30+ countries.
+            {COMPANY.name} designs, builds and supports custom software, web and mobile platforms for growing
+            organisations.
           </motion.p>
           <motion.div className="hero-actions" variants={item}>
-            <Link className="btn btn-primary" to="/products">Explore our products</Link>
-            <Link className="btn btn-ghost" to="/story">Our story</Link>
-          </motion.div>
-          <motion.div className="hero-note" variants={item}>
-            <span className="pulse-dot" />
-            All four platforms operating — 99.98% uptime this quarter
+            <Link className="btn btn-primary" to="/services">Our services</Link>
+            <Link className="btn btn-ghost" to="/products">View products</Link>
           </motion.div>
         </div>
       </motion.div>

@@ -1,13 +1,15 @@
 import { useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { useReducedMotion } from '../hooks'
 import { ArrowUpRight, ProductGlyph } from './Icons'
 import Reveal from './Reveal'
 
 const MAX_TILT = 11 // degrees
+const MotionLink = motion.create(Link)
 
 /**
- * A card that tilts in 3D toward the cursor and links out to the product's own site.
+ * A card that tilts in 3D toward the cursor and opens the product's own page.
  * `expanded` adds the longer copy and highlight list used on the products page.
  */
 export default function ProductCard({ product, index = 0, expanded = false }) {
@@ -39,24 +41,23 @@ export default function ProductCard({ product, index = 0, expanded = false }) {
 
   return (
     <Reveal className="tilt" delay={index * 0.07}>
-      <motion.a
+      <MotionLink
         ref={ref}
         className={`card${expanded ? ' card-lg' : ''}`}
-        href={product.url}
-        target="_blank"
-        rel="noopener noreferrer"
+        to={`/products/${product.slug}`}
         style={{ '--accent': product.accent, rotateX: reduced ? 0 : rotateX, rotateY: reduced ? 0 : rotateY }}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         whileHover={reduced ? undefined : { y: -6 }}
         transition={{ duration: 0.3 }}
       >
+        <span className="card-media" style={{ '--photo': `url(${product.image})` }} aria-hidden="true" />
         <div className="card-inner">
           <div className="card-top">
-            <span className="card-icon"><ProductGlyph name={product.glyph} /></span>
-            <span className={`chip${product.status === 'Beta' ? ' chip-beta' : ''}`}>{product.status}</span>
+            <span className="card-icon on-media"><ProductGlyph name={product.glyph} /></span>
+            <span className={`chip${product.status === 'Sample' ? ' chip-sample' : ''}`}>{product.status}</span>
           </div>
-          <p className="card-cat">{product.category} · since {product.since}</p>
+          <p className="card-cat">{product.category}</p>
           <h3>{product.name}</h3>
           <p className="card-tagline">{product.tagline}</p>
           <p>{expanded ? product.detail : product.blurb}</p>
@@ -68,19 +69,13 @@ export default function ProductCard({ product, index = 0, expanded = false }) {
           )}
 
           <div className="card-foot">
-            {expanded && (
-              <span className="card-metric">
-                <b>{product.metric.value}</b>
-                <small>{product.metric.label}</small>
-              </span>
-            )}
             <span className="card-go">
-              Visit {product.name}
+              View details
               <ArrowUpRight />
             </span>
           </div>
         </div>
-      </motion.a>
+      </MotionLink>
     </Reveal>
   )
 }

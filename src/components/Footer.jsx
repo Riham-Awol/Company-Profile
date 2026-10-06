@@ -7,32 +7,28 @@ export default function Footer() {
       <div className="shell foot-top">
         <div className="foot-brand">
           <Link className="brand" to="/">
-            <span className="brand-mark">N</span>
+            <span className="brand-mark">X</span>
             {COMPANY.name.toUpperCase()}
           </Link>
-          <p>{COMPANY.tagline}. Independent since {COMPANY.founded}.</p>
+          <p>{COMPANY.tagline}.</p>
         </div>
 
         <div className="foot-col">
           <h4>Products</h4>
           {PRODUCTS.map((p) => (
-            <a key={p.slug} href={p.url} target="_blank" rel="noopener noreferrer">{p.name}</a>
+            <Link key={p.slug} to={`/products/${p.slug}`}>{p.name}</Link>
           ))}
         </div>
 
         <div className="foot-col">
           <h4>Company</h4>
-          <Link to="/products">All products</Link>
-          <Link to="/story">Our story</Link>
-          <Link to="/#contact">Contact</Link>
+          <Link to="/">Home</Link>
+          <Link to="/services">Services</Link>
+          <Link to="/products">Products</Link>
+          <Link to="/about">About Us</Link>
+          <Link to="/contact">Contact Us</Link>
         </div>
 
-        <div className="foot-col">
-          <h4>Studios</h4>
-          <span>Addis Ababa</span>
-          <span>Nairobi</span>
-          <span>Dubai</span>
-        </div>
       </div>
 
       <div className="shell foot-bottom">

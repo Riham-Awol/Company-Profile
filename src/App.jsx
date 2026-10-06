@@ -1,10 +1,13 @@
 import { useEffect } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Home from './pages/Home'
+import ServicesPage from './pages/ServicesPage'
 import ProductsPage from './pages/ProductsPage'
-import StoryPage from './pages/StoryPage'
+import ProductPage from './pages/ProductPage'
+import AboutPage from './pages/AboutPage'
+import ContactPage from './pages/ContactPage'
 import NotFound from './pages/NotFound'
 
 /** Restores the top of the page on navigation, or jumps to a #hash target. */
@@ -34,8 +37,12 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/services" element={<ServicesPage />} />
           <Route path="/products" element={<ProductsPage />} />
-          <Route path="/story" element={<StoryPage />} />
+          <Route path="/products/:slug" element={<ProductPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/story" element={<Navigate to="/about" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

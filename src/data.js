@@ -1,221 +1,172 @@
 export const COMPANY = {
-  name: 'Nexora',
-  tagline: 'Engineering the Next Decade',
-  email: 'hello@nexora.example.com',
-  founded: 2011,
+  name: 'X Solvd',
+  tagline: 'Software engineered for real-world problems',
+  email: 'hello@xsolvd.example.com',
 }
 
-export const STATS = [
-  { value: 500, suffix: '+', label: 'Clients worldwide' },
-  { value: 1200, suffix: '+', label: 'Projects delivered' },
-  { value: 15, suffix: '+', label: 'Years in market' },
-  { value: 30, suffix: '+', label: 'Countries served' },
-]
+/** Background photos (Unsplash, free licence). Swap any URL for your own image in /public. */
+const photo = (id) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1920&q=70`
+
+export const IMAGES = {
+  home: photo('1451187580459-43490279c0fa'),
+  services: photo('1518770660439-4636190af475'),
+  products: photo('1460925895917-afdab827c52f'),
+  about: photo('1522071820081-009f0129c71c'),
+  contact: photo('1497366216548-37526070297c'),
+}
 
 /**
- * Each product runs on its own site — replace `url` with the real address.
- * `featured` products are the ones surfaced on the home page.
+ * `type` is either 'Product' (our own platforms, with a `url` to the live site)
+ * or 'Sample project' (representative delivery work with no public site).
+ * Every entry gets its own page at /products/:slug.
  */
 export const PRODUCTS = [
   {
-    slug: 'vantacloud',
-    name: 'VantaCloud',
-    category: 'Infrastructure',
-    since: 2014,
+    slug: 'mentee-mentor',
+    name: 'Mentee Mentor',
+    type: 'Product',
+    category: 'Education',
     status: 'Live',
-    tagline: 'From commit to production in minutes',
-    blurb: 'Managed cloud hosting and deployment pipelines that take a team from commit to production in minutes.',
-    detail:
-      'VantaCloud began as the deploy script we used on our own client work. It now runs build, release and rollback for teams that would rather ship features than maintain a pipeline — with preview environments on every pull request and a one-command rollback that has never taken more than nine seconds.',
-    highlights: ['Preview environment per pull request', 'Zero-downtime blue/green releases', 'Rollback in under ten seconds'],
-    metric: { value: '2,400+', label: 'teams deploying' },
-    url: 'https://vantacloud.example.com',
+    tagline: 'Structured mentorship at scale',
+    blurb: 'Matches mentees with the right mentors and keeps every programme on track.',
+    detail: 'A mentorship platform that pairs mentees with mentors by goals and expertise, then manages sessions, progress and feedback in one place.',
+    highlights: ['Goal-based matching', 'Session scheduling and tracking', 'Progress reporting for programme leads'],
+    features: [
+      { title: 'Smart matching', text: 'Pairs mentees and mentors by goals, skills and availability.' },
+      { title: 'Session management', text: 'Scheduling, reminders and shared notes for every meeting.' },
+      { title: 'Progress tracking', text: 'Milestones and feedback that show how each pairing is going.' },
+      { title: 'Programme insights', text: 'Reporting for coordinators running cohorts at scale.' },
+    ],
+    audience: ['Universities and schools', 'Corporate learning teams', 'Professional associations'],
+    url: 'https://mentee-mentor.example.com',
+    image: photo('1523240795612-9a054b0db644'),
     accent: '#22d3ee',
-    glyph: 'cloud',
-    featured: true,
+    glyph: 'people',
   },
   {
-    slug: 'pulsegrid',
-    name: 'PulseGrid',
-    category: 'Analytics',
-    since: 2017,
+    slug: 'famour',
+    name: 'Famour',
+    type: 'Product',
+    category: 'Matrimonial',
     status: 'Live',
-    tagline: 'Dashboards your whole company can read',
-    blurb: 'Real-time dashboards that turn raw product events into decisions your whole company can read.',
-    detail:
-      'PulseGrid ingests product events and turns them into dashboards that a finance lead and a backend engineer can argue over using the same numbers. Every metric carries its definition, so nobody has to ask which query produced the chart.',
-    highlights: ['Sub-second queries over billions of events', 'Every metric shows its own definition', 'Alerts that route to the owning team'],
-    metric: { value: '8B', label: 'events processed daily' },
-    url: 'https://pulsegrid.example.com',
-    accent: '#4ade80',
-    glyph: 'chart',
-    featured: true,
-  },
-  {
-    slug: 'axiom-ai',
-    name: 'Axiom AI',
-    category: 'Intelligence',
-    since: 2021,
-    status: 'Live',
-    tagline: 'Document work, handled',
-    blurb: 'Document intelligence and workflow automation built on large language models, tuned to your domain.',
-    detail:
-      'Axiom reads the contracts, invoices and claim forms that pile up in shared inboxes, extracts what matters and routes it into the systems you already run. It cites the page and line behind every extraction, so a reviewer can check its work in seconds.',
-    highlights: ['Line-level citations on every extraction', 'Fine-tuned on your own document set', 'Human review queue built in'],
-    metric: { value: '94%', label: 'straight-through processing' },
-    url: 'https://axiom-ai.example.com',
-    accent: '#a78bfa',
-    glyph: 'spark',
-    featured: true,
-  },
-  {
-    slug: 'ledgerly',
-    name: 'Ledgerly',
-    category: 'Fintech',
-    since: 2024,
-    status: 'Live',
-    tagline: 'Billing that survives the next pricing change',
-    blurb: 'Billing, invoicing and revenue reporting designed for subscription businesses at any scale.',
-    detail:
-      'Ledgerly handles usage-based, seat-based and hybrid pricing without a rewrite every time the commercial team invents a new plan. Revenue recognition reports come out the far end in a shape your accountant already recognises.',
-    highlights: ['Usage, seat and hybrid pricing models', 'Automated revenue recognition', 'Multi-currency, multi-entity'],
-    metric: { value: '$1.4B', label: 'invoiced annually' },
-    url: 'https://ledgerly.example.com',
-    accent: '#fb923c',
-    glyph: 'ledger',
-    featured: true,
-  },
-  {
-    slug: 'meridian',
-    name: 'Meridian',
-    category: 'Geospatial',
-    since: 2019,
-    status: 'Live',
-    tagline: 'Every vehicle, every route, one map',
-    blurb: 'Fleet tracking and route optimisation on a live map, built for operators running hundreds of vehicles.',
-    detail:
-      'Meridian came out of the logistics work that paid our bills in the early years. It plots live vehicle positions, replans routes around traffic and closures, and tells a dispatcher which promise is about to be broken before the customer calls to ask.',
-    highlights: ['Live positions at one-second resolution', 'Route replanning around live conditions', 'Delay alerts before the customer notices'],
-    metric: { value: '40M', label: 'km planned monthly' },
-    url: 'https://meridian.example.com',
-    accent: '#38bdf8',
-    glyph: 'map',
-    featured: false,
-  },
-  {
-    slug: 'aegis',
-    name: 'Aegis',
-    category: 'Security',
-    since: 2022,
-    status: 'Live',
-    tagline: 'Access control without the spreadsheet',
-    blurb: 'Identity, access reviews and audit trails for teams that have outgrown a shared password manager.',
-    detail:
-      'Aegis maps who can reach what across your cloud accounts, databases and internal tools, then walks you through quarterly access reviews in an afternoon instead of a fortnight. Every grant and revocation lands in an immutable log your auditor can read.',
-    highlights: ['Access map across cloud, data and internal tools', 'Quarterly reviews in an afternoon', 'Immutable, exportable audit log'],
-    metric: { value: 'SOC 2', label: 'Type II certified' },
-    url: 'https://aegis.example.com',
+    tagline: 'Meaningful connections, built on trust',
+    blurb: 'A matrimonial platform for serious, family-centred relationships.',
+    detail: 'Famour helps people find a life partner through verified profiles, compatibility-based discovery and privacy controls designed around family values.',
+    highlights: ['Verified profiles', 'Privacy-first by design', 'Family involvement supported'],
+    features: [
+      { title: 'Verified profiles', text: 'Identity checks so members know who they are talking to.' },
+      { title: 'Compatibility search', text: 'Filters for values, background, location and preferences.' },
+      { title: 'Privacy controls', text: 'Members decide who sees their photos and details.' },
+      { title: 'Family involvement', text: 'Optional access for family members to support the search.' },
+    ],
+    audience: ['Individuals seeking marriage', 'Families supporting the search'],
+    url: 'https://matrimonial-website-2xkg.onrender.com/#/o/famour',
+    image: photo('1519741497674-611481863552'),
     accent: '#f472b6',
-    glyph: 'shield',
-    featured: false,
+    glyph: 'heart',
   },
   {
-    slug: 'relay',
-    name: 'Relay',
-    category: 'Intelligence',
-    since: 2025,
-    status: 'Beta',
-    tagline: 'Support that answers from your own docs',
-    blurb: 'A support assistant grounded in your documentation, your tickets and your product — never in guesswork.',
-    detail:
-      'Relay drafts replies from your own help centre and ticket history, hands anything it is unsure about to a human, and learns from the correction. It is our newest platform and is in open beta while we get the escalation behaviour exactly right.',
-    highlights: ['Answers grounded in your own content', 'Escalates rather than guesses', 'Learns from every human correction'],
-    metric: { value: '61%', label: 'tickets deflected in beta' },
-    url: 'https://relay.example.com',
-    accent: '#facc15',
-    glyph: 'chat',
-    featured: false,
+    slug: 'import-export',
+    name: 'Import & Export Management',
+    type: 'Sample project',
+    category: 'Trade & Logistics',
+    status: 'Sample',
+    tagline: 'End-to-end visibility for cross-border trade',
+    blurb: 'Shipments, customs documents and supplier records managed in a single system.',
+    detail: 'A trade operations system covering purchase orders, shipment tracking, customs documentation and landed-cost calculation across suppliers and markets.',
+    highlights: ['Shipment and container tracking', 'Customs document generation', 'Landed-cost and margin reporting'],
+    features: [
+      { title: 'Order management', text: 'Purchase and sales orders linked to every shipment.' },
+      { title: 'Shipment tracking', text: 'Container and consignment status from origin to warehouse.' },
+      { title: 'Customs documents', text: 'Invoices, packing lists and certificates generated automatically.' },
+      { title: 'Cost reporting', text: 'Landed cost, duties and margin per product and shipment.' },
+    ],
+    audience: ['Importers and exporters', 'Freight forwarders', 'Wholesale distributors'],
+    image: photo('1494412574643-ff11b0a5c1c3'),
+    accent: '#fb923c',
+    glyph: 'globe',
+  },
+  {
+    slug: 'building-management',
+    name: 'Building Management',
+    type: 'Sample project',
+    category: 'Property & Facilities',
+    status: 'Sample',
+    tagline: 'Every unit, tenant and work order in one view',
+    blurb: 'Leasing, maintenance and billing for residential and commercial properties.',
+    detail: 'A property management system that handles tenants and leases, maintenance requests, rent collection and occupancy reporting across multiple buildings.',
+    highlights: ['Tenant and lease management', 'Maintenance work orders', 'Automated rent invoicing'],
+    features: [
+      { title: 'Tenants and leases', text: 'Contracts, renewals and documents in one record per unit.' },
+      { title: 'Maintenance', text: 'Requests, work orders and contractor assignment with status tracking.' },
+      { title: 'Billing', text: 'Automated rent invoices, payment tracking and reminders.' },
+      { title: 'Occupancy reporting', text: 'Vacancy, arrears and income across every building.' },
+    ],
+    audience: ['Property owners', 'Facility managers', 'Real estate companies'],
+    image: photo('1486406146926-c627a92ad1ab'),
+    accent: '#4ade80',
+    glyph: 'building',
   },
 ]
 
-export const FEATURED_PRODUCTS = PRODUCTS.filter((p) => p.featured)
+export const PRODUCT_TYPES = ['All', 'Product', 'Sample project']
 
-export const PRODUCT_CATEGORIES = ['All', ...new Set(PRODUCTS.map((p) => p.category))]
+export const SERVICES = [
+  {
+    title: 'Custom Software Development',
+    text: 'Business systems built around your processes, not the other way round.',
+    tags: ['ERP', 'CRM', 'Workflow automation'],
+    glyph: 'code',
+  },
+  {
+    title: 'Web & Mobile Applications',
+    text: 'Responsive web platforms and mobile apps for customers and staff.',
+    tags: ['Web apps', 'iOS', 'Android'],
+    glyph: 'device',
+  },
+  {
+    title: 'UI/UX Design',
+    text: 'Clear, accessible interfaces designed and tested with real users.',
+    tags: ['Research', 'Prototyping', 'Design systems'],
+    glyph: 'pen',
+  },
+  {
+    title: 'Cloud & DevOps',
+    text: 'Secure hosting, automated deployments and monitoring.',
+    tags: ['Cloud hosting', 'CI/CD', 'Monitoring'],
+    glyph: 'cloud',
+  },
+  {
+    title: 'Systems Integration',
+    text: 'Connect existing tools, payment gateways and third-party APIs.',
+    tags: ['APIs', 'Payments', 'Data migration'],
+    glyph: 'link',
+  },
+  {
+    title: 'Support & Maintenance',
+    text: 'Ongoing updates, security patches and performance improvements.',
+    tags: ['SLAs', 'Security updates', 'Enhancements'],
+    glyph: 'shield',
+  },
+]
 
-export const STORY = [
-  {
-    year: '2011',
-    title: 'Three engineers, one rented room',
-    text: 'Nexora starts as a contract shop in Addis Ababa, building internal tools for logistics companies that had outgrown spreadsheets. The first office is one room above a print shop, rented month to month.',
-  },
-  {
-    year: '2012',
-    title: 'The rule that stuck',
-    text: 'After a release goes badly wrong overnight, we start the Thursday demo: every second week, anyone can show anything, finished or not. Fourteen years later it is still the only meeting nobody is allowed to skip.',
-  },
-  {
-    year: '2014',
-    title: 'The first product',
-    text: 'A deployment tool we wrote for ourselves becomes VantaCloud after four clients ask to license it. We stop billing by the hour and start supporting software we own.',
-  },
-  {
-    year: '2016',
-    title: 'Turning down the money',
-    text: 'A fund offers a term sheet that would have doubled headcount in a year. We pass, and grow on revenue instead. It is the slowest decision we ever made and the one we have never regretted.',
-  },
-  {
-    year: '2017',
-    title: 'Crossing borders',
-    text: 'Offices open in Nairobi and Dubai. PulseGrid ships to its first twenty customers, and the team passes fifty people without losing the weekly demo.',
-  },
-  {
-    year: '2019',
-    title: 'Back to the warehouses',
-    text: 'The logistics work that funded the early years becomes a product of its own. Meridian launches with three fleet operators who had been running on our custom code for years.',
-  },
-  {
-    year: '2021',
-    title: 'Betting on AI',
-    text: 'A small research group spends a year on document understanding with no deadline and no customer. That group becomes Axiom AI, now our fastest-growing platform.',
-  },
-  {
-    year: '2022',
-    title: 'Putting our own house in order',
-    text: 'Preparing for SOC 2 exposes how much of our own access control lived in spreadsheets. The tooling we build to fix it ships to customers as Aegis the following spring.',
-  },
-  {
-    year: '2024',
-    title: 'Four platforms, one studio',
-    text: 'Ledgerly completes the commercial side of the suite. Nexora passes 500 clients across 30 countries — still shipping every second Thursday.',
-  },
-  {
-    year: '2025',
-    title: 'Relay enters beta',
-    text: 'Our sixth platform opens to a few hundred support teams, built on the grounding work that came out of Axiom. We keep it in beta until the escalation behaviour is right.',
-  },
-  {
-    year: '2026',
-    title: 'Fifteen years in',
-    text: 'Seven platforms, three studios, no outside capital. The Thursday demo runs at 4pm, and the room is a great deal bigger than it was above the print shop.',
-  },
+export const STATS = [
+  { value: PRODUCTS.filter((p) => p.type === 'Product').length, suffix: '', label: 'Live platforms' },
+  { value: SERVICES.length, suffix: '', label: 'Core services' },
+  { value: 100, suffix: '%', label: 'In-house engineering' },
+  { value: 24, suffix: 'h', label: 'Response time' },
+]
+
+export const PROCESS = [
+  { step: '01', title: 'Discover', text: 'Define the problem, the users and what success looks like.' },
+  { step: '02', title: 'Design', text: 'Shape the product and architecture before writing code.' },
+  { step: '03', title: 'Build', text: 'Deliver in short, reviewable increments.' },
+  { step: '04', title: 'Support', text: 'Operate, monitor and improve after launch.' },
 ]
 
 export const VALUES = [
-  { title: 'Own the outcome', text: 'We measure ourselves on what ships and stays up, not on hours logged.' },
-  { title: 'Small teams, full context', text: 'Every engineer talks to users. No layer of translation between the problem and the fix.' },
-  { title: 'Secure by default', text: 'Encryption, audit trails and least privilege are day-one requirements, not a later phase.' },
-  { title: 'Show the work', text: 'Unfinished work in front of people beats a polished demo of something nobody needs.' },
-]
-
-export const LEADERSHIP = [
-  { name: 'Selam Girma', role: 'Co-founder & CEO', note: 'Wrote the first line of what became VantaCloud. Still reviews pull requests on Fridays.', initials: 'SG' },
-  { name: 'Daniel Okoye', role: 'Co-founder & CTO', note: 'Built the logistics work that funded the first four years, and the Meridian engine that grew out of it.', initials: 'DO' },
-  { name: 'Hana Tesfaye', role: 'Chief Product Officer', note: 'Joined as employee number nine. Runs the Thursday demo and protects it from the calendar.', initials: 'HT' },
-  { name: 'Marcus Reed', role: 'VP Engineering', note: 'Led the SOC 2 programme that turned into Aegis. Believes every alert should name an owner.', initials: 'MR' },
-]
-
-export const OFFICES = [
-  { city: 'Addis Ababa', role: 'Headquarters', since: 2011, team: 'Engineering · Product · Support' },
-  { city: 'Nairobi', role: 'Engineering studio', since: 2017, team: 'Platform · Data' },
-  { city: 'Dubai', role: 'Commercial hub', since: 2017, team: 'Sales · Partnerships' },
+  { title: 'Ownership', text: 'We are accountable for outcomes, not hours.' },
+  { title: 'Clarity', text: 'Simple solutions, clearly communicated.' },
+  { title: 'Security', text: 'Data protection is a requirement from day one.' },
+  { title: 'Quality', text: 'Software built to last, not just to launch.' },
 ]

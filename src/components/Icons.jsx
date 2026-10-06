@@ -9,6 +9,7 @@ const base = {
   strokeLinejoin: 'round',
 }
 
+/** Line icons for products and services, keyed by name. */
 export const ProductGlyph = ({ name }) => {
   const paths = {
     cloud: <path d="M17.5 19a4.5 4.5 0 0 0 .3-9A6 6 0 0 0 6.3 11 3.5 3.5 0 0 0 7 19h10.5Z" />,
@@ -47,6 +48,47 @@ export const ProductGlyph = ({ name }) => {
       <>
         <rect x="4" y="3" width="16" height="18" rx="2" />
         <path d="M8 8h8M8 12h8M8 16h5" />
+      </>
+    ),
+    people: (
+      <>
+        <circle cx="9" cy="8" r="3" />
+        <path d="M3.5 19a5.5 5.5 0 0 1 11 0" />
+        <circle cx="16.5" cy="9.5" r="2.5" />
+        <path d="M15.5 14.2A4.5 4.5 0 0 1 20.5 19" />
+      </>
+    ),
+    heart: <path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z" />,
+    globe: (
+      <>
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="M3.5 12h17M12 3.5c2.4 2.4 3.5 5.2 3.5 8.5s-1.1 6.1-3.5 8.5c-2.4-2.4-3.5-5.2-3.5-8.5s1.1-6.1 3.5-8.5Z" />
+      </>
+    ),
+    code: <path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4.5l-3 15" />,
+    device: (
+      <>
+        <rect x="3" y="4" width="13" height="10" rx="1.5" />
+        <path d="M6 18h7" />
+        <rect x="17" y="8" width="4.5" height="11" rx="1" />
+      </>
+    ),
+    pen: (
+      <>
+        <path d="M14.5 5.5 18.5 9.5 9 19H5v-4l9.5-9.5Z" />
+        <path d="m12.5 7.5 4 4" />
+      </>
+    ),
+    link: (
+      <>
+        <path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1" />
+        <path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" />
+      </>
+    ),
+    building: (
+      <>
+        <rect x="5" y="3" width="14" height="18" rx="1.5" />
+        <path d="M9 7h1.5M13.5 7H15M9 11h1.5M13.5 11H15M9 15h1.5M13.5 15H15M10.5 21v-3h3v3" />
       </>
     ),
   }
@@ -89,5 +131,24 @@ export const MenuIcon = ({ open }) => (
 export const CheckIcon = () => (
   <svg {...base} width={28} height={28} strokeWidth={2}>
     <path d="m5 13 4.5 4.5L19 7" />
+  </svg>
+)
+
+export const ArrowLeft = () => (
+  <svg {...base} width={16} height={16}>
+    <path d="M19 12H5M11 18l-6-6 6-6" />
+  </svg>
+)
+
+export const ThemeIcon = ({ theme }) => (
+  <svg {...base} width={19} height={19} strokeWidth={1.8}>
+    {theme === 'dark' ? (
+      <>
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4" />
+      </>
+    ) : (
+      <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" />
+    )}
   </svg>
 )

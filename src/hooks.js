@@ -29,3 +29,18 @@ export function useScrolled(offset = 24) {
 
   return scrolled
 }
+
+/**
+ * The colour theme, stored on <html data-theme>. index.html sets the initial value before
+ * first paint (saved choice, else the OS preference) so the page never flashes the wrong theme.
+ */
+export function useTheme() {
+  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'dark')
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    try { localStorage.setItem('theme', theme) } catch { /* storage unavailable — theme still applies */ }
+  }, [theme])
+
+  return [theme, () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))]
+}
