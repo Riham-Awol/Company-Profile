@@ -52,6 +52,10 @@ The light/dark choice is stored in `localStorage` and applied by a small script 
 `index.html` before first paint; first-time visitors get their OS preference. Colours are
 CSS custom properties in `src/styles.css` (`:root` for dark, `[data-theme='light']` for light).
 
+The palette is three colours: Glory Blue `#0E1E42` (Pantone 2767C), Glory Red `#AF143C`
+(Pantone 202C) and white. Dark mode is navy with white text; light mode is white with navy
+text; red is the accent in both.
+
 ## Before going live
 
 - **Product URLs** — the Mentee Mentor `url` in `src/data.js` is a placeholder.

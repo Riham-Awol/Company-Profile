@@ -40,8 +40,6 @@ export const PRODUCTS = [
     audience: ['Universities and schools', 'Corporate learning teams', 'Professional associations'],
     url: 'https://mentee-mentor.example.com',
     image: photo('1523240795612-9a054b0db644'),
-    accent: '#22d3ee',
-    accentLight: '#9a6b3f',
     glyph: 'people',
   },
   {
@@ -63,8 +61,6 @@ export const PRODUCTS = [
     audience: ['Individuals seeking marriage', 'Families supporting the search'],
     url: 'https://matrimonial-website-2xkg.onrender.com/#/o/famour',
     image: photo('1519741497674-611481863552'),
-    accent: '#f472b6',
-    accentLight: '#a4505a',
     glyph: 'heart',
   },
   {
@@ -85,8 +81,6 @@ export const PRODUCTS = [
     ],
     audience: ['Importers and exporters', 'Freight forwarders', 'Wholesale distributors'],
     image: photo('1494412574643-ff11b0a5c1c3'),
-    accent: '#fb923c',
-    accentLight: '#b5763a',
     glyph: 'globe',
   },
   {
@@ -107,14 +101,15 @@ export const PRODUCTS = [
     ],
     audience: ['Property owners', 'Facility managers', 'Real estate companies'],
     image: photo('1486406146926-c627a92ad1ab'),
-    accent: '#4ade80',
-    accentLight: '#6b7a4b',
     glyph: 'building',
   },
 ]
 
-/** A product's accent colour for the current theme — the light theme uses warmer, earthy tones. */
-export const accentFor = (product, theme) => (theme === 'light' ? product.accentLight : product.accent)
+/** Brand palette (Pantone 2767C, 202C and white). The CSS custom properties in styles.css mirror it. */
+export const PALETTE = { navy: '#0E1E42', red: '#AF143C', white: '#FFFFFF' }
+
+/** Card accent. Every card uses Glory Red, so cards read as one family in both themes. */
+export const accentFor = () => PALETTE.red
 
 export const PRODUCT_TYPES = ['All', 'Product', 'Sample project']
 
@@ -138,8 +133,6 @@ export const PILLARS = [
     ],
     art: 'innovation',
     glyph: 'spark',
-    accent: '#22d3ee',
-    accentLight: '#9a6b3f',
   },
   {
     key: 'software',
@@ -150,8 +143,6 @@ export const PILLARS = [
     projects: PRODUCTS.map((p) => ({ name: p.name, category: p.category, status: p.status, text: p.blurb, slug: p.slug })),
     art: 'software',
     glyph: 'code',
-    accent: '#a5b4fc',
-    accentLight: '#8b5a2b',
     featured: true,
   },
   {
@@ -167,8 +158,6 @@ export const PILLARS = [
     ],
     art: 'design',
     glyph: 'cube',
-    accent: '#fb923c',
-    accentLight: '#b5763a',
   },
 ]
 

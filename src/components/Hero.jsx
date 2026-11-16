@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { COMPANY, IMAGES, PRODUCTS, accentFor } from '../data'
+import { COMPANY, IMAGES } from '../data'
 import { useReducedMotion, useTheme } from '../hooks'
 
 // three.js is ~700kB — kept out of the initial bundle and fetched after paint.
@@ -30,7 +30,7 @@ export default function Hero() {
       {/* The WebGL layer is decorative — skipped entirely for reduced-motion visitors. */}
       {!reduced && (
         <Suspense fallback={null}>
-          <Scene3D theme={theme} accents={PRODUCTS.map((p) => accentFor(p, theme))} />
+          <Scene3D theme={theme} />
         </Suspense>
       )}
 

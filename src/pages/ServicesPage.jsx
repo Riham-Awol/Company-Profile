@@ -36,7 +36,7 @@ export default function ServicesPage() {
           <div className="steps">
             {PROCESS.map((item, i) => (
               <Reveal className="step" key={item.step} delay={i * 0.08}>
-                <span className="step-num" style={{ color: 'var(--brand)' }}>{item.step}</span>
+                <span className="step-num" style={{ color: 'var(--brand-ink)' }}>{item.step}</span>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
               </Reveal>
