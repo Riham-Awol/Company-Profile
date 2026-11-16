@@ -4,10 +4,11 @@ A multi-page company profile for X Solvd, with light and dark themes.
 
 | Route              | Page                                                              |
 | ------------------ | ----------------------------------------------------------------- |
-| `/`                | Hero, stats, services, products, process, call to action          |
+| `/`                | Hero, stats, 3D discipline cards, sites showcase, process, CTA    |
 | `/services`        | All services and the delivery process                             |
 | `/products`        | Products and sample projects, filterable by type                  |
 | `/products/:slug`  | One page per product: overview, features, link to its live site   |
+| `/work/:key`       | Projects for one discipline (`innovation`, `software`, `design`)  |
 | `/about`           | Who we are, process and principles (`/story` redirects here)      |
 | `/contact`         | Contact form (`?interest=<slug>` preselects a product)            |
 | `*`                | 404                                                               |
@@ -36,8 +37,10 @@ src/
   App.jsx                 routes + scroll/hash handling
   data.js                 all copy and image URLs: products, services, stats, process, values
   hooks.js                reduced-motion, scroll-position and theme hooks
-  pages/                  Home, Services, Products, Product, About, Contact, NotFound
+  pages/                  Home, Services, Products, Product, Work, About, Contact, NotFound
   components/             Nav, LampToggle (theme switch), Hero, Scene3D, Stats, ProductCard,
+                          PillarStage + PillarArt (3D discipline cards and their illustrations),
+                          SiteShowcase (sites and features in a 3D browser window),
                           PageHeader (optional background photo), Contact, Footer
 ```
 
@@ -49,11 +52,17 @@ The light/dark choice is stored in `localStorage` and applied by a small script 
 `index.html` before first paint; first-time visitors get their OS preference. Colours are
 CSS custom properties in `src/styles.css` (`:root` for dark, `[data-theme='light']` for light).
 
+The palette is three colours: Glory Blue `#0E1E42` (Pantone 2767C), Glory Red `#AF143C`
+(Pantone 202C) and white. Dark mode is navy with white text; light mode is white with navy
+text; red is the accent in both.
+
 ## Before going live
 
 - **Product URLs** — the Mentee Mentor `url` in `src/data.js` is a placeholder.
 - **Photos** — background and product images are hotlinked from Unsplash via `IMAGES` and
   each product's `image` in `src/data.js`. Replace them with your own (e.g. files in `public/`).
+- **Projects** — the Technical Innovation and Industrial Design projects under `PILLARS` in
+  `src/data.js` are placeholders. Replace them with real work.
 - **Email** — `COMPANY.email` in `src/data.js` is a placeholder.
 - **Contact form** — validation and the success state are real, but nothing is sent.
   Replace the `setTimeout` in `src/components/Contact.jsx` with a POST to your endpoint.

@@ -1,60 +1,10 @@
 import { Link } from 'react-router-dom'
-import { PROCESS, PRODUCTS, SERVICES } from '../data'
+import { PROCESS } from '../data'
 import Hero from '../components/Hero'
 import Stats from '../components/Stats'
-import ProductCard from '../components/ProductCard'
+import PillarStage from '../components/PillarStage'
+import SiteShowcase from '../components/SiteShowcase'
 import Reveal from '../components/Reveal'
-import { ArrowUpRight, ProductGlyph } from '../components/Icons'
-
-function ServicesPreview() {
-  return (
-    <section className="section">
-      <div className="shell">
-        <div className="section-head">
-          <div>
-            <p className="eyebrow">Services</p>
-            <h2>What we do</h2>
-          </div>
-          <Link className="text-link" to="/services">
-            All services <ArrowUpRight />
-          </Link>
-        </div>
-        <div className="service-grid">
-          {SERVICES.slice(0, 3).map((service, i) => (
-            <Reveal className="service" key={service.title} delay={i * 0.07}>
-              <span className="card-icon"><ProductGlyph name={service.glyph} /></span>
-              <h3>{service.title}</h3>
-              <p>{service.text}</p>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function ProductsPreview() {
-  return (
-    <section className="section band">
-      <div className="shell">
-        <div className="section-head">
-          <div>
-            <p className="eyebrow">Products</p>
-            <h2>Platforms and projects</h2>
-          </div>
-          <Link className="text-link" to="/products">
-            View all <ArrowUpRight />
-          </Link>
-        </div>
-        <div className="product-grid">
-          {PRODUCTS.map((product, i) => (
-            <ProductCard key={product.slug} product={product} index={i} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
 
 function ApproachPreview() {
   return (
@@ -87,8 +37,8 @@ export default function Home() {
     <>
       <Hero />
       <Stats />
-      <ServicesPreview />
-      <ProductsPreview />
+      <PillarStage />
+      <SiteShowcase />
       <ApproachPreview />
       <section className="section section-tight">
         <div className="shell">

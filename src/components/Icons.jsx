@@ -65,6 +65,12 @@ export const ProductGlyph = ({ name }) => {
         <path d="M3.5 12h17M12 3.5c2.4 2.4 3.5 5.2 3.5 8.5s-1.1 6.1-3.5 8.5c-2.4-2.4-3.5-5.2-3.5-8.5s1.1-6.1 3.5-8.5Z" />
       </>
     ),
+    cube: (
+      <>
+        <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z" />
+        <path d="m4 7.5 8 4.5 8-4.5M12 12v9" />
+      </>
+    ),
     code: <path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4.5l-3 15" />,
     device: (
       <>
@@ -94,6 +100,12 @@ export const ProductGlyph = ({ name }) => {
   }
   return <svg {...base} width={24} height={24}>{paths[name] ?? paths.cloud}</svg>
 }
+
+export const FlipIcon = () => (
+  <svg {...base} width={16} height={16}>
+    <path d="M4 9a8 8 0 0 1 14-3.5L20 8M20 4v4h-4M20 15a8 8 0 0 1-14 3.5L4 16M4 20v-4h4" />
+  </svg>
+)
 
 export const ArrowUpRight = () => (
   <svg {...base} width={16} height={16}>

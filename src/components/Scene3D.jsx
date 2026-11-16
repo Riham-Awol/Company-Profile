@@ -3,15 +3,17 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Float, MeshDistortMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 
-/** Scene colours per site theme: cool cyan/indigo in dark, warm bronze and caramel in light. */
+/** Scene colours per site theme, all from the brand palette: red core on navy, navy core on white. */
 const PALETTES = {
   dark: {
-    core: '#12a4bd', emissive: '#0b4f6c', shell: '#6366f1', dust: '#8fd8e8',
-    key: '#e0f7ff', fillA: '#6366f1', fillB: '#22d3ee', spot: '#a5f3fc',
+    core: '#af143c', emissive: '#4a0718', shell: '#ffffff', dust: '#ffffff',
+    key: '#ffffff', fillA: '#af143c', fillB: '#3a5cb0', spot: '#ffffff',
+    satellites: ['#ffffff', '#af143c', '#ffffff', '#af143c'],
   },
   light: {
-    core: '#b07a4a', emissive: '#5a3418', shell: '#8b5a2b', dust: '#a0714a',
-    key: '#fff4e6', fillA: '#c08552', fillB: '#e0b386', spot: '#ffe2c2',
+    core: '#0e1e42', emissive: '#0e1e42', shell: '#0e1e42', dust: '#0e1e42',
+    key: '#ffffff', fillA: '#af143c', fillB: '#ffffff', spot: '#ffffff',
+    satellites: ['#af143c', '#0e1e42', '#af143c', '#0e1e42'],
   },
 }
 
@@ -78,7 +80,7 @@ function Shell({ palette }) {
   )
 }
 
-/** Four satellites, one per product, tracing their own orbit. */
+/** Four satellites tracing their own orbit. */
 function Satellites({ colors }) {
   const group = useRef()
 
@@ -95,9 +97,9 @@ function Satellites({ colors }) {
         const angle = (i / colors.length) * Math.PI * 2
         const radius = 3.1
         return (
-          <mesh key={color} position={[Math.cos(angle) * radius, 0, Math.sin(angle) * radius]}>
+          <mesh key={i} position={[Math.cos(angle) * radius, 0, Math.sin(angle) * radius]}>
             <sphereGeometry args={[0.135, 24, 24]} />
-            <meshStandardMaterial color={color} emissive={color} emissiveIntensity={1.7} roughness={0.35} />
+            <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.55} roughness={0.35} />
           </mesh>
         )
       })}
@@ -139,7 +141,7 @@ function Dust({ palette, count = 340 }) {
   )
 }
 
-export default function Scene3D({ accents, theme = 'dark' }) {
+export default function Scene3D({ theme = 'dark' }) {
   const palette = PALETTES[theme] ?? PALETTES.dark
 
   return (
@@ -160,7 +162,7 @@ export default function Scene3D({ accents, theme = 'dark' }) {
         <ParallaxRig>
           <Core palette={palette} />
           <Shell palette={palette} />
-          <Satellites colors={accents} />
+          <Satellites colors={palette.satellites} />
           <Dust palette={palette} />
         </ParallaxRig>
       </Suspense>
