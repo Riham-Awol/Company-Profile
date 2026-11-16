@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import ServicesPage from './pages/ServicesPage'
 import ProductsPage from './pages/ProductsPage'
 import ProductPage from './pages/ProductPage'
+import WorkPage from './pages/WorkPage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
 import NotFound from './pages/NotFound'
@@ -40,6 +41,7 @@ export default function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:slug" element={<ProductPage />} />
+          <Route path="/work/:key" element={<WorkPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/story" element={<Navigate to="/about" replace />} />

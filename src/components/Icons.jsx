@@ -101,6 +101,12 @@ export const ProductGlyph = ({ name }) => {
   return <svg {...base} width={24} height={24}>{paths[name] ?? paths.cloud}</svg>
 }
 
+export const FlipIcon = () => (
+  <svg {...base} width={16} height={16}>
+    <path d="M4 9a8 8 0 0 1 14-3.5L20 8M20 4v4h-4M20 15a8 8 0 0 1-14 3.5L4 16M4 20v-4h4" />
+  </svg>
+)
+
 export const ArrowUpRight = () => (
   <svg {...base} width={16} height={16}>
     <path d="M7 17 17 7M8 7h9v9" />

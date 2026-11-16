@@ -121,6 +121,8 @@ export const PRODUCT_TYPES = ['All', 'Product', 'Sample project']
 /**
  * The three disciplines shown on the home page stage. The middle entry (`featured`) is
  * drawn in front; `art` picks the illustration in components/PillarArt.jsx.
+ * Each card flips to show its `projects`, listed in full at /work/:key. A project with a
+ * `slug` links to that product's page.
  */
 export const PILLARS = [
   {
@@ -128,6 +130,12 @@ export const PILLARS = [
     title: 'Technical Innovation',
     text: 'New ideas turned into working technology.',
     features: ['Rapid prototyping', 'AI and automation', 'Connected systems'],
+    lead: 'Research, prototypes and emerging technology, tested early and turned into something that works.',
+    projects: [
+      { name: 'Predictive Maintenance Monitor', category: 'Industrial IoT', status: 'Sample', text: 'Sensor data and alerts that flag equipment faults before they stop a production line.' },
+      { name: 'Document AI Assistant', category: 'AI & Automation', status: 'Sample', text: 'Reads invoices and forms, extracts the data and files it without manual entry.' },
+      { name: 'Smart Energy Dashboard', category: 'Connected Systems', status: 'Sample', text: 'Live energy use across sites, with targets and anomaly alerts.' },
+    ],
     art: 'innovation',
     glyph: 'spark',
     accent: '#22d3ee',
@@ -138,6 +146,8 @@ export const PILLARS = [
     title: 'Software Development',
     text: 'Web, mobile and business software, built to last.',
     features: ['Web and mobile apps', 'Custom business systems', 'Cloud and integrations'],
+    lead: 'The platforms and business systems we have designed, built and continue to support.',
+    projects: PRODUCTS.map((p) => ({ name: p.name, category: p.category, status: p.status, text: p.blurb, slug: p.slug })),
     art: 'software',
     glyph: 'code',
     accent: '#a5b4fc',
@@ -149,6 +159,12 @@ export const PILLARS = [
     title: 'Industrial Design',
     text: 'Products shaped for people and for production.',
     features: ['Concept and form', '3D modelling', 'Design for manufacture'],
+    lead: 'Physical products taken from first sketch to a design that is ready to manufacture.',
+    projects: [
+      { name: 'Handheld Scanner Enclosure', category: 'Product Design', status: 'Sample', text: 'A rugged, comfortable housing for a warehouse barcode scanner.' },
+      { name: 'Self-Service Kiosk', category: 'Industrial Design', status: 'Sample', text: 'A floor-standing kiosk designed for easy assembly and servicing.' },
+      { name: 'Wearable Tracker Casing', category: 'Consumer Product', status: 'Sample', text: 'A slim, water-resistant casing and strap for a fitness tracker.' },
+    ],
     art: 'design',
     glyph: 'cube',
     accent: '#fb923c',
