@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useMotionValue, useSpring, useTransform } from 'framer-motion'
 
 /** True when the visitor has asked the OS to minimise motion. */
 export function useReducedMotion() {
@@ -52,4 +53,29 @@ export function useTheme() {
   }
 
   return [theme, toggle]
+}
+
+/**
+ * 3D tilt toward the cursor. Spread `handlers` on the element that tracks the pointer and
+ * pass `style` (rotateX/rotateY motion values) to the motion element that should lean.
+ * `rest` is the resting pose in degrees. Does nothing for reduced-motion visitors.
+ */
+export function useTilt(max = 6, rest = { x: 0, y: 0 }) {
+  const reduced = useReducedMotion()
+  const px = useMotionValue(0.5)
+  const py = useMotionValue(0.5)
+  const spring = { stiffness: 140, damping: 20, mass: 0.7 }
+  const rotateX = useSpring(useTransform(py, [0, 1], [rest.x + max, rest.x - max]), spring)
+  const rotateY = useSpring(useTransform(px, [0, 1], [rest.y - max, rest.y + max]), spring)
+
+  const handlers = reduced ? {} : {
+    onMouseMove: (event) => {
+      const rect = event.currentTarget.getBoundingClientRect()
+      px.set((event.clientX - rect.left) / rect.width)
+      py.set((event.clientY - rect.top) / rect.height)
+    },
+    onMouseLeave: () => { px.set(0.5); py.set(0.5) },
+  }
+
+  return { handlers, style: { rotateX, rotateY } }
 }

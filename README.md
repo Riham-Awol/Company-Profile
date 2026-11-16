@@ -4,7 +4,7 @@ A multi-page company profile for X Solvd, with light and dark themes.
 
 | Route              | Page                                                              |
 | ------------------ | ----------------------------------------------------------------- |
-| `/`                | Hero, stats, services, products, process, call to action          |
+| `/`                | Hero, stats, 3D discipline cards, sites showcase, process, CTA    |
 | `/services`        | All services and the delivery process                             |
 | `/products`        | Products and sample projects, filterable by type                  |
 | `/products/:slug`  | One page per product: overview, features, link to its live site   |
@@ -38,6 +38,8 @@ src/
   hooks.js                reduced-motion, scroll-position and theme hooks
   pages/                  Home, Services, Products, Product, About, Contact, NotFound
   components/             Nav, LampToggle (theme switch), Hero, Scene3D, Stats, ProductCard,
+                          PillarStage + PillarArt (3D discipline cards and their illustrations),
+                          SiteShowcase (sites and features in a 3D browser window),
                           PageHeader (optional background photo), Contact, Footer
 ```
 

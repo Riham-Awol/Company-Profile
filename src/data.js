@@ -118,6 +118,44 @@ export const accentFor = (product, theme) => (theme === 'light' ? product.accent
 
 export const PRODUCT_TYPES = ['All', 'Product', 'Sample project']
 
+/**
+ * The three disciplines shown on the home page stage. The middle entry (`featured`) is
+ * drawn in front; `art` picks the illustration in components/PillarArt.jsx.
+ */
+export const PILLARS = [
+  {
+    key: 'innovation',
+    title: 'Technical Innovation',
+    text: 'New ideas turned into working technology.',
+    features: ['Rapid prototyping', 'AI and automation', 'Connected systems'],
+    art: 'innovation',
+    glyph: 'spark',
+    accent: '#22d3ee',
+    accentLight: '#9a6b3f',
+  },
+  {
+    key: 'software',
+    title: 'Software Development',
+    text: 'Web, mobile and business software, built to last.',
+    features: ['Web and mobile apps', 'Custom business systems', 'Cloud and integrations'],
+    art: 'software',
+    glyph: 'code',
+    accent: '#a5b4fc',
+    accentLight: '#8b5a2b',
+    featured: true,
+  },
+  {
+    key: 'design',
+    title: 'Industrial Design',
+    text: 'Products shaped for people and for production.',
+    features: ['Concept and form', '3D modelling', 'Design for manufacture'],
+    art: 'design',
+    glyph: 'cube',
+    accent: '#fb923c',
+    accentLight: '#b5763a',
+  },
+]
+
 export const SERVICES = [
   {
     title: 'Custom Software Development',
